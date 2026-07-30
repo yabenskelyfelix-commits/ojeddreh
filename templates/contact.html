@@ -1,0 +1,56 @@
+{% set titre = 'Contact — OJEDDREH' %}
+{% set description = 'Contactez OJEDDREH à EKAM, Haïti.' %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Contact</div>
+    <h1>Nous contacter</h1>
+    <p>Une question, une idée de collaboration, une demande d'information ? Écrivez-nous, nous vous répondrons dans les meilleurs délais.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="grid-2">
+    <div class="reveal">
+      <span class="eyebrow">Coordonnées</span>
+      <div style="height:20px"></div>
+      <div class="contact-info">
+        <div class="ci"><div class="ic">📍</div><div><b>Siège</b><span><a href="https://maps.app.goo.gl/Q1LA4MPaCKyDU6uf8" target="_blank" rel="noopener">Route Nationale #6, Village La Différence (EKAM), Haïti</a></span></div></div>
+        <div class="ci"><div class="ic">✉️</div><div><b>E-mail</b><span>ojeddreh@gmail.com</span></div></div>
+        <div class="ci"><div class="ic">📞</div><div><b>Téléphone</b><span>+509 3538 8312</span></div></div>
+        <div class="ci"><div class="ic">👤</div><div><b>Personne de contact</b><span>Shnaider Florestant</span></div></div>
+      </div>
+      <div style="margin-top:26px">
+        <div class="eyebrow">Suivez-nous</div>
+        <div class="socials" style="margin-top:12px">
+          <a href="https://www.instagram.com/ojeddreh" target="_blank" rel="noopener" aria-label="Instagram" style="background:var(--green-700);color:#fff;width:44px;height:44px;border-radius:10px;display:grid;place-items:center">IG</a>
+          <a href="https://www.facebook.com/share/p/1BakGcbqx8/" target="_blank" rel="noopener" aria-label="Facebook" style="background:var(--green-700);color:#fff;width:44px;height:44px;border-radius:10px;display:grid;place-items:center">FB</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="form-card" data-endpoint="/api/contact">
+        <div class="form-msg"></div>
+        <div class="form-row">
+          <div class="field"><label>Prénom <span class="req">*</span></label><input name="prenom" required></div>
+          <div class="field"><label>Nom <span class="req">*</span></label><input name="nom" required></div>
+        </div>
+        <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div class="field"><label>Sujet</label>
+          <select name="sujet">
+            <option>Information générale</option>
+            <option>Partenariat</option>
+            <option>Presse / média</option>
+            <option>Bénévolat / adhésion</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="field"><label>Message <span class="req">*</span></label><textarea name="message" required placeholder="Votre message…"></textarea></div>
+        <button class="btn btn-red" type="submit">Envoyer le message</button>
+      </form>
+    </div>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

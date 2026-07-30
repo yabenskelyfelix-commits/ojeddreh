@@ -1,0 +1,99 @@
+{% set titre = 'Candidatures — Espace réservé OJEDDREH' %}
+{% include 'partials/head.html' %}
+<div class="admin-shell">
+  <div class="admin-wrap">
+    <div class="admin-bar">
+      <h1>Candidatures d'adhésion ({{ candidatures|length }})</h1>
+      <div style="display:flex;gap:16px">
+        <a href="{{ url_for('admin_accueil') }}">← Accueil</a>
+        <a href="{{ url_for('admin_deconnexion') }}">Se déconnecter</a>
+      </div>
+    </div>
+
+    {% if not candidatures %}
+      <div class="admin-card admin-empty">Aucune candidature reçue pour le moment.</div>
+    {% endif %}
+
+    {% for c in candidatures %}
+    <div class="admin-card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:flex-start">
+        <div>
+          <h2 style="font-family:'Libre Franklin';font-weight:800;font-size:1.1rem">{{ c.nom_complet }}</h2>
+          <div class="admin-meta">
+            <span>{{ c.email }}</span><span>{{ c.telephone }}</span>
+            <span>{{ c.departement }}</span>
+            <span>Reçu le {{ c.recu_le[:16].replace('T',' à ') if c.recu_le else '—' }}</span>
+          </div>
+        </div>
+        {% if c.evaluation and c.evaluation.decision %}
+          <span class="admin-tag {{ 'accepte' if 'Accepté' in c.evaluation.decision else ('refuse' if c.evaluation.decision == 'Refusé' else 'attente') }}">{{ c.evaluation.decision }}</span>
+        {% else %}
+          <span class="admin-tag">Non noté</span>
+        {% endif %}
+      </div>
+
+      {% if c.fichier_piece_identite or c.fichier_photo_identite or c.fichier_cv or c.fichier_lettre_motivation %}
+      <div class="admin-files">
+        {% if c.fichier_cv %}<a href="{{ url_for('admin_fichier', chemin_relatif=c.fichier_cv) }}" target="_blank">📄 CV</a>{% endif %}
+        {% if c.fichier_lettre_motivation %}<a href="{{ url_for('admin_fichier', chemin_relatif=c.fichier_lettre_motivation) }}" target="_blank">📄 Lettre de motivation</a>{% endif %}
+        {% if c.fichier_piece_identite %}<a href="{{ url_for('admin_fichier', chemin_relatif=c.fichier_piece_identite) }}" target="_blank">🪪 Pièce d'identité</a>{% endif %}
+        {% if c.fichier_photo_identite %}<a href="{{ url_for('admin_fichier', chemin_relatif=c.fichier_photo_identite) }}" target="_blank">🖼️ Photo d'identité</a>{% endif %}
+      </div>
+      {% endif %}
+
+      <details class="admin-details">
+        <summary>Voir le formulaire complet</summary>
+        <div class="admin-details-body">
+          <div><b>Sexe :</b> {{ c.sexe or '—' }} · <b>Naissance :</b> {{ c.date_naissance or '—' }} à {{ c.lieu_naissance or '—' }} · <b>Nationalité :</b> {{ c.nationalite or '—' }}</div>
+          <div><b>Adresse :</b> {{ c.adresse or '—' }}</div>
+          <div><b>Urgence :</b> {{ c.urgence_nom or '—' }} ({{ c.urgence_relation or '—' }}) — {{ c.urgence_telephone or '—' }}</div>
+          <div><b>Niveau académique :</b> {{ c.niveau_academique or '—' }} · <b>Formation :</b> {{ c.formation_principale or '—' }}</div>
+          <div><b>Profession actuelle :</b> {{ c.profession_actuelle or '—' }}</div>
+          <div><b>Expériences :</b> {{ c.experiences_professionnelles or '—' }}</div>
+          <div><b>Certifications :</b> {{ c.certifications or '—' }}</div>
+          <div><b>Langues :</b> {{ (c.langues|join(', ')) or '—' }}{% if c.langue_autre %}, {{ c.langue_autre }}{% endif %}</div>
+          <div><b>Pourquoi rejoindre :</b> {{ c.motivation_integrer or '—' }}</div>
+          <div><b>Apport à l'organisation :</b> {{ c.apport_organisation or '—' }}</div>
+          <div><b>Changements souhaités :</b> {{ c.changements_communaute or '—' }}</div>
+          <div><b>Vision à 5 ans :</b> {{ c.vision_5ans or '—' }}</div>
+          <div><b>Disponibilité :</b> {{ c.temps_disponible or '—' }} · {{ (c.creneaux_disponibles|join(', ')) or '—' }} · Déplacement : {{ c.deplacement or '—' }}</div>
+          <div><b>Consentement image :</b> {{ c.consentement_image or '—' }}</div>
+          <div><b>Conflit d'intérêts :</b> {{ c.conflit_interets or '—' }}{% if c.conflit_interets_detail %} — {{ c.conflit_interets_detail }}{% endif %}</div>
+          <div><b>Références :</b> {{ c.references_personnelles or '—' }}</div>
+          <div><b>Autres informations :</b> {{ c.autres_informations or '—' }}</div>
+          <div><b>Signature électronique :</b> {{ c.signature_nom or '—' }}</div>
+        </div>
+      </details>
+
+      <details class="admin-details" {% if c.evaluation %}open{% endif %}>
+        <summary>Grille d'évaluation interne (réservée aux organisateurs)</summary>
+        <form method="post" action="{{ url_for('admin_noter_candidature', id_candidature=c.id) }}" style="margin-top:14px">
+          <div class="admin-grid-notes">
+            {% for cle, label, points in grille %}
+            <div><label>{{ label }} (/{{ points }})</label>
+              <input type="number" name="{{ cle }}" min="0" max="{{ points }}" value="{{ c.evaluation[cle] if c.evaluation else '' }}"></div>
+            {% endfor %}
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Département attribué</label><input name="departement_attribue" value="{{ c.evaluation.departement_attribue if c.evaluation else c.departement }}"></div>
+            <div class="field"><label>Fonction proposée</label><input name="fonction_proposee" value="{{ c.evaluation.fonction_proposee if c.evaluation else '' }}"></div>
+          </div>
+          <div class="field"><label>Décision du comité</label>
+            <select name="decision">
+              {% set actuelle = c.evaluation.decision if c.evaluation else '' %}
+              <option value="" {{ 'selected' if not actuelle }}>— À décider —</option>
+              {% for opt in ['Accepté','Accepté sous condition','Liste d\'attente','Refusé'] %}
+              <option {{ 'selected' if actuelle == opt }}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field"><label>Notes internes</label><textarea name="notes">{{ c.evaluation.notes if c.evaluation else '' }}</textarea></div>
+          <button class="btn btn-green" type="submit">Enregistrer la note</button>
+        </form>
+      </details>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>

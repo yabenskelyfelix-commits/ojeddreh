@@ -1,0 +1,24 @@
+{% set titre = 'Espace réservé — OJEDDREH' %}
+{% include 'partials/head.html' %}
+<div class="admin-shell">
+  <div class="admin-wrap">
+    <div class="admin-bar">
+      <h1>Espace réservé — OJEDDREH</h1>
+      <a href="{{ url_for('admin_deconnexion') }}">Se déconnecter</a>
+    </div>
+    <div class="form-row">
+      <a class="admin-card" style="text-decoration:none;color:inherit;display:block" href="{{ url_for('admin_candidatures') }}">
+        <span class="eyebrow">Adhésion</span>
+        <h2 style="margin:8px 0;font-family:'Libre Franklin';font-weight:800">Candidatures reçues</h2>
+        <p style="color:var(--muted)">{{ nb_candidatures }} formulaire(s) d'intégration à examiner et noter.</p>
+      </a>
+      <a class="admin-card" style="text-decoration:none;color:inherit;display:block" href="{{ url_for('admin_ateliers') }}">
+        <span class="eyebrow">Ateliers</span>
+        <h2 style="margin:8px 0;font-family:'Libre Franklin';font-weight:800">Inscriptions aux ateliers</h2>
+        <p style="color:var(--muted)">{{ nb_ateliers }} inscription(s) à examiner et noter.</p>
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Déposez ici le logo et les photos de l'organisation.
+
+Exemple : placez "logo.png" dans ce dossier, puis référencez-le
+dans views/partials/header.ejs par : <img src="/img/logo.png" class="logo-mark" alt="OJEDDREH">

@@ -1,0 +1,133 @@
+{% set titre = 'Programmes & projets — OJEDDREH' %}
+{% set description = "Les programmes et projets d'OJEDDREH autour de ses trois axes prioritaires." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Programmes &amp; projets</div>
+    <h1>Programmes &amp; projets</h1>
+    <p>Nos programmes agissent simultanément sur le capital humain, l'économie et la gouvernance durable. Chaque formation débouche sur une application concrète.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="axes-grid">
+    <div class="axe a1 reveal"><div class="num">AXE 01 · CAPITAL HUMAIN</div><h3>Former &amp; révéler</h3>
+      <ul><li>Programmes de leadership</li><li>Ateliers de développement personnel</li><li>Formation professionnelle</li><li>Soutien à l'excellence académique</li></ul></div>
+    <div class="axe a2 reveal"><div class="num">AXE 02 · ÉCONOMIE</div><h3>Entreprendre &amp; innover</h3>
+      <ul><li>Incubation et accompagnement de projets</li><li>Agrobusiness et chaînes de valeur</li><li>Innovation technologique &amp; IA</li><li>Développement économique local</li></ul></div>
+    <div class="axe a3 reveal"><div class="num">AXE 03 · DURABILITÉ</div><h3>Protéger &amp; inclure</h3>
+      <ul><li>Sensibilisation environnementale &amp; climat</li><li>Inclusion des jeunes et des femmes</li><li>Gouvernance citoyenne</li><li>Partenariats internationaux</li></ul></div>
+  </div>
+</div></section>
+
+<section style="background:var(--paper-2)"><div class="wrap">
+  <div class="sec-head reveal" style="text-align:center;margin:0 auto 30px"><span class="eyebrow" style="justify-content:center">Bientôt</span><h2>Nos projets en préparation</h2></div>
+  <div class="empty-note reveal">
+    <b>Les fiches détaillées des projets seront publiées prochainement.</b><br>
+    Chaque projet présentera son titre, ses objectifs, ses résultats et ses photos. Vous souhaitez soutenir ou co-construire un projet ?
+    <div style="margin-top:16px"><a class="btn btn-red" href="{{ url_for('partenaires') }}">Devenir partenaire</a></div>
+  </div>
+</div></section>
+<section id="inscription-atelier" style="background:var(--paper-2)"><div class="wrap">
+  <div class="sec-head reveal" style="text-align:center;margin:0 auto 30px"><span class="eyebrow" style="justify-content:center">S'inscrire</span><h2>Inscription à un atelier</h2>
+    <p>Vous souhaitez participer à un atelier OJEDDREH ? Remplissez ce formulaire, nous vous recontacterons pour vous confirmer la date et le lieu.</p>
+  </div>
+  <div class="reveal" style="max-width:900px;margin:0 auto">
+    <form class="form-card" data-endpoint="/api/atelier">
+      <div class="form-msg"></div>
+
+      <h2 class="form-section-title">Informations personnelles</h2>
+      <div class="form-row">
+        <div class="field"><label>Nom et prénom <span class="req">*</span></label><input name="nom_prenom" required></div>
+        <div class="field"><label>Sexe</label>
+          <div class="check-group">
+            <label class="check-item"><input type="radio" name="sexe" value="Masculin"> Masculin</label>
+            <label class="check-item"><input type="radio" name="sexe" value="Féminin"> Féminin</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Date de naissance</label><input type="date" name="date_naissance"></div>
+        <div class="field"><label>Âge</label><input type="number" name="age" min="0"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Téléphone <span class="req">*</span></label><input name="telephone" required></div>
+        <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+      </div>
+      <div class="field"><label>Adresse</label><input name="adresse"></div>
+      <div class="form-row">
+        <div class="field"><label>Commune</label><input name="commune"></div>
+        <div class="field"><label>Département (géographique)</label><input name="departement_geo" placeholder="Ex. Ouest, Artibonite…"></div>
+      </div>
+
+      <h2 class="form-section-title">Situation académique et professionnelle</h2>
+      <div class="field"><label>Niveau d'études</label>
+        <div class="check-group">
+          {% for niveau in ['Secondaire','Technique','Universitaire','Diplômé'] %}
+          <label class="check-item"><input type="radio" name="niveau_etudes" value="{{ niveau }}"> {{ niveau }}</label>
+          {% endfor %}
+          <label class="check-item"><input type="radio" name="niveau_etudes" value="Autre"> Autre</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Établissement / Entreprise</label><input name="etablissement"></div>
+        <div class="field"><label>Profession ou activité actuelle</label><input name="profession_actuelle"></div>
+      </div>
+
+      <h2 class="form-section-title">Intérêt et objectif</h2>
+      <div class="field"><label>Pourquoi souhaitez-vous participer à cet atelier ? <span class="req">*</span></label><textarea name="pourquoi_participer" required></textarea></div>
+      <div class="field"><label>Principaux centres d'intérêt</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="interet_dev_personnel"> Développement personnel</label>
+          <label class="check-item"><input type="checkbox" name="interet_leadership"> Leadership</label>
+          <label class="check-item"><input type="checkbox" name="interet_agriculture"> Agriculture</label>
+          <label class="check-item"><input type="checkbox" name="interet_entrepreneuriat_agricole"> Entrepreneuriat agricole</label>
+          <label class="check-item"><input type="checkbox" name="interet_agrobusiness"> Agro-business</label>
+          <label class="check-item"><input type="checkbox" name="interet_innovation"> Innovation</label>
+          <label class="check-item"><input type="checkbox" name="interet_gestion_projet"> Gestion de projet</label>
+        </div>
+        <input name="interet_autre" placeholder="Autre centre d'intérêt (facultatif)" style="margin-top:10px">
+      </div>
+      <div class="field"><label>Que souhaitez-vous apprendre ?</label><textarea name="souhait_apprentissage"></textarea></div>
+
+      <h2 class="form-section-title">Expériences</h2>
+      <div class="field"><label>Avez-vous déjà participé à une formation similaire ?</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="formation_similaire" value="Oui"> Oui</label>
+          <label class="check-item"><input type="radio" name="formation_similaire" value="Non"> Non</label>
+        </div>
+        <input name="formation_similaire_detail" placeholder="Si oui, laquelle ?" style="margin-top:10px">
+      </div>
+      <div class="field"><label>Avez-vous un projet agricole, technologique ou entrepreneurial ?</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="projet_perso" value="Oui"> Oui</label>
+          <label class="check-item"><input type="radio" name="projet_perso" value="Non"> Non</label>
+        </div>
+        <textarea name="projet_perso_detail" placeholder="Description (facultatif)" style="margin-top:10px"></textarea>
+      </div>
+
+      <h2 class="form-section-title">Engagement du participant</h2>
+      <ul class="engagement-list">
+        <li>Respecter les horaires de l'atelier</li>
+        <li>Participer activement aux activités</li>
+        <li>Respecter les autres participants</li>
+        <li>Appliquer les connaissances acquises</li>
+        <li>Représenter dignement le programme</li>
+      </ul>
+      <div class="field"><label class="check-item"><input type="checkbox" name="accepte_engagement" required> Je m'engage à respecter ces principes <span class="req">*</span></label></div>
+
+      <div class="field"><label>Autorisation photo et vidéo</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="autorisation_image" value="Autorise" required> J'autorise l'utilisation des photos/vidéos prises durant l'atelier</label>
+          <label class="check-item"><input type="radio" name="autorisation_image" value="Refuse"> Je n'autorise pas l'utilisation de mon image</label>
+        </div>
+      </div>
+
+      <div class="field"><label>Signature (tapez votre nom complet) <span class="req">*</span></label><input name="signature_nom" required></div>
+
+      <button class="btn btn-red" type="submit">Envoyer mon inscription</button>
+    </form>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

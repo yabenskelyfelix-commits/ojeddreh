@@ -1,0 +1,56 @@
+{% set titre = 'Partenaires — OJEDDREH' %}
+{% set description = "Devenez partenaire d'OJEDDREH : institutions, universités, entreprises, ONG et bailleurs." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Partenaires</div>
+    <h1>Construisons ensemble</h1>
+    <p>Universités, entreprises, ONG, institutions publiques et partenaires internationaux : unissons nos forces au service de la jeunesse haïtienne.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Pourquoi nous rejoindre</span><h2>Un partenariat à fort impact</h2></div>
+  <div class="grid-3">
+    <div class="dcard reveal"><div class="ic">🎯</div><h4>Des objectifs mesurables</h4><p>Chaque initiative est conçue autour d'indicateurs de performance et de mécanismes d'évaluation.</p></div>
+    <div class="dcard reveal"><div class="ic">🌍</div><h4>Contribution aux ODD</h4><p>Vos actions s'inscrivent dans 6 Objectifs de Développement Durable des Nations Unies.</p></div>
+    <div class="dcard reveal"><div class="ic">🔗</div><h4>Une plateforme de synergies</h4><p>Nous réunissons jeunes, entrepreneurs, chercheurs, secteur privé et institutions autour d'objectifs communs.</p></div>
+  </div>
+</div></section>
+
+<section style="background:var(--paper-2)"><div class="wrap">
+  <div class="grid-2">
+    <div class="prose reveal">
+      <span class="eyebrow">Ils peuvent nous rejoindre</span>
+      <h2>Ouvert à tous les acteurs du développement</h2>
+      <p>Nos partenaires viennent d'Haïti comme du reste du monde. Il suffit de partager notre engagement pour la technologie, l'innovation entrepreneuriale et un développement durable et résilient.</p>
+      <ul>
+        <li>Universités et centres de recherche</li>
+        <li>Entreprises et secteur privé</li>
+        <li>ONG et organisations de la société civile</li>
+        <li>Institutions publiques et collectivités</li>
+        <li>Partenaires techniques et financiers (bailleurs)</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <form class="form-card" data-endpoint="/api/partenaire">
+        <div class="form-msg"></div>
+        <div class="field"><label>Organisation <span class="req">*</span></label><input name="organisation" required></div>
+        <div class="form-row">
+          <div class="field"><label>Personne de contact <span class="req">*</span></label><input name="contact" required></div>
+          <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+        </div>
+        <div class="field"><label>Type de partenaire</label>
+          <select name="type">
+            <option>Université / recherche</option><option>Entreprise</option><option>ONG</option>
+            <option>Institution publique</option><option>Bailleur / partenaire financier</option><option>Autre</option>
+          </select>
+        </div>
+        <div class="field"><label>Votre proposition <span class="req">*</span></label><textarea name="message" required placeholder="Décrivez votre projet ou votre intérêt de collaboration…"></textarea></div>
+        <button class="btn btn-red" type="submit">Envoyer la demande</button>
+      </form>
+    </div>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

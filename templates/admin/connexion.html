@@ -1,0 +1,15 @@
+{% set titre = 'Espace réservé — OJEDDREH' %}
+{% include 'partials/head.html' %}
+<div class="admin-shell">
+  <div class="admin-login admin-card">
+    <h1 style="font-family:'Libre Franklin';font-weight:800;color:var(--green-800);margin-bottom:6px">Espace réservé</h1>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:20px">Accès réservé aux personnes chargées de recevoir et de noter les formulaires reçus.</p>
+    {% if erreur %}<div class="form-msg err" style="display:block">{{ erreur }}</div>{% endif %}
+    <form method="post">
+      <div class="field"><label>Mot de passe</label><input type="password" name="mot_de_passe" required autofocus></div>
+      <button class="btn btn-red" type="submit" style="width:100%">Se connecter</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

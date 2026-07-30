@@ -1,0 +1,79 @@
+{% set titre = 'Inscriptions ateliers — Espace réservé OJEDDREH' %}
+{% include 'partials/head.html' %}
+<div class="admin-shell">
+  <div class="admin-wrap">
+    <div class="admin-bar">
+      <h1>Inscriptions aux ateliers ({{ inscriptions|length }})</h1>
+      <div style="display:flex;gap:16px">
+        <a href="{{ url_for('admin_accueil') }}">← Accueil</a>
+        <a href="{{ url_for('admin_deconnexion') }}">Se déconnecter</a>
+      </div>
+    </div>
+
+    {% if not inscriptions %}
+      <div class="admin-card admin-empty">Aucune inscription reçue pour le moment.</div>
+    {% endif %}
+
+    {% for p in inscriptions %}
+    <div class="admin-card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:flex-start">
+        <div>
+          <h2 style="font-family:'Libre Franklin';font-weight:800;font-size:1.1rem">{{ p.nom_prenom }}</h2>
+          <div class="admin-meta">
+            <span>{{ p.email }}</span><span>{{ p.telephone }}</span>
+            <span>{{ p.commune or '—' }}{% if p.departement_geo %}, {{ p.departement_geo }}{% endif %}</span>
+            <span>Reçu le {{ p.recu_le[:16].replace('T',' à ') if p.recu_le else '—' }}</span>
+          </div>
+        </div>
+        {% if p.evaluation and p.evaluation.decision %}
+          <span class="admin-tag {{ 'accepte' if 'Accepté' in p.evaluation.decision else ('refuse' if p.evaluation.decision == 'Non retenu' else 'attente') }}">{{ p.evaluation.decision }}</span>
+        {% else %}
+          <span class="admin-tag">Non noté</span>
+        {% endif %}
+      </div>
+
+      <details class="admin-details">
+        <summary>Voir le formulaire complet</summary>
+        <div class="admin-details-body">
+          <div><b>Sexe :</b> {{ p.sexe or '—' }} · <b>Naissance :</b> {{ p.date_naissance or '—' }} · <b>Âge :</b> {{ p.age or '—' }}</div>
+          <div><b>Adresse :</b> {{ p.adresse or '—' }}</div>
+          <div><b>Niveau d'études :</b> {{ p.niveau_etudes or '—' }} · <b>Établissement :</b> {{ p.etablissement or '—' }}</div>
+          <div><b>Profession actuelle :</b> {{ p.profession_actuelle or '—' }}</div>
+          <div><b>Pourquoi participer :</b> {{ p.pourquoi_participer or '—' }}</div>
+          <div><b>Centres d'intérêt :</b> {{ (p.centres_interet|join(', ')) or '—' }}{% if p.interet_autre %}, {{ p.interet_autre }}{% endif %}</div>
+          <div><b>Souhait d'apprentissage :</b> {{ p.souhait_apprentissage or '—' }}</div>
+          <div><b>Formation similaire :</b> {{ p.formation_similaire or '—' }}{% if p.formation_similaire_detail %} — {{ p.formation_similaire_detail }}{% endif %}</div>
+          <div><b>Projet perso :</b> {{ p.projet_perso or '—' }}{% if p.projet_perso_detail %} — {{ p.projet_perso_detail }}{% endif %}</div>
+          <div><b>Autorisation image :</b> {{ p.autorisation_image or '—' }}</div>
+          <div><b>Signature électronique :</b> {{ p.signature_nom or '—' }}</div>
+        </div>
+      </details>
+
+      <details class="admin-details" {% if p.evaluation %}open{% endif %}>
+        <summary>Grille d'évaluation interne (réservée aux organisateurs)</summary>
+        <form method="post" action="{{ url_for('admin_noter_atelier', id_inscription=p.id) }}" style="margin-top:14px">
+          <div class="admin-grid-notes">
+            {% for cle, label, points in grille %}
+            <div><label>{{ label }} (/{{ points }})</label>
+              <input type="number" name="{{ cle }}" min="0" max="{{ points }}" value="{{ p.evaluation[cle] if p.evaluation else '' }}"></div>
+            {% endfor %}
+          </div>
+          <div class="field"><label>Décision</label>
+            <select name="decision">
+              {% set actuelle = p.evaluation.decision if p.evaluation else '' %}
+              <option value="" {{ 'selected' if not actuelle }}>— À décider —</option>
+              {% for opt in ["Accepté pour atelier(s)","Liste d'attente atelier(s)","Non retenu"] %}
+              <option {{ 'selected' if actuelle == opt }}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field"><label>Notes internes</label><textarea name="notes">{{ p.evaluation.notes if p.evaluation else '' }}</textarea></div>
+          <button class="btn btn-green" type="submit">Enregistrer la note</button>
+        </form>
+      </details>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>

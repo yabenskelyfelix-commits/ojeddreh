@@ -1,0 +1,49 @@
+{% set titre = "Domaines d'intervention — OJEDDREH" %}
+{% set description = "Les 12 domaines d'intervention d'OJEDDREH, organisés en 3 axes prioritaires." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Domaines d'intervention</div>
+    <h1>Nos domaines d'intervention</h1>
+    <p>Douze domaines complémentaires, organisés autour de trois axes prioritaires, pour une action intégrée du local à l'international.</p>
+  </div>
+</div>
+
+<section id="axes"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Structure</span><h2>Trois axes prioritaires</h2></div>
+  <div class="axes-grid">
+    <div class="axe a1 reveal"><div class="num">AXE 01</div><h3>Capital humain</h3>
+      <ul><li>Développement personnel</li><li>Leadership</li><li>Éducation</li><li>Formation professionnelle</li></ul></div>
+    <div class="axe a2 reveal"><div class="num">AXE 02</div><h3>Développement économique</h3>
+      <ul><li>Entrepreneuriat</li><li>Agrobusiness</li><li>Innovation technologique</li><li>Développement économique local</li></ul></div>
+    <div class="axe a3 reveal"><div class="num">AXE 03</div><h3>Développement durable &amp; gouvernance</h3>
+      <ul><li>Environnement &amp; climat</li><li>Inclusion sociale</li><li>Gouvernance citoyenne</li><li>Partenariats internationaux</li></ul></div>
+  </div>
+</div></section>
+
+<section style="background:var(--paper-2)"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">En détail</span><h2>Les 12 domaines</h2></div>
+  <div class="dom-grid">
+    
+    {% for d in domaines %}
+      <div class="dom-item reveal"><div class="no">DOMAINE {{ d[0] }}</div><h3>{{ d[1] }}</h3><p>{{ d[2] }}</p></div>
+    {% endfor %}
+  </div>
+</div></section>
+
+<section class="odd"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Agenda 2030</span>
+    <h2>Un ancrage dans 6 Objectifs de Développement Durable</h2>
+  </div>
+  <div class="odd-row">
+    <div class="odd-tile odd2 reveal"><div class="n">02</div><div class="l">Faim « zéro »</div></div>
+    <div class="odd-tile odd4 reveal"><div class="n">04</div><div class="l">Éducation de qualité</div></div>
+    <div class="odd-tile odd8 reveal"><div class="n">08</div><div class="l">Travail décent</div></div>
+    <div class="odd-tile odd9 reveal"><div class="n">09</div><div class="l">Innovation</div></div>
+    <div class="odd-tile odd13 reveal"><div class="n">13</div><div class="l">Climat</div></div>
+    <div class="odd-tile odd17 reveal"><div class="n">17</div><div class="l">Partenariats</div></div>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

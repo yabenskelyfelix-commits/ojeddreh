@@ -1,0 +1,45 @@
+<footer id="contact-foot"><div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="word">OJED<b>D</b>REH</div>
+      <p class="full">Organisation des Jeunes pour le Développement Durable et de la Résilience Économique d'Haïti — ONG fondée en 2026.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/ojeddreh" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.26 2.2.43.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 1.9c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.3-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C2.7 9.5 2.7 9.9 2.7 12s0 2.5.1 3.3c0 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.3.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.3.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.5-.1-3.3c0-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.3-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1m0 3.2a4.7 4.7 0 100 9.4 4.7 4.7 0 000-9.4m0 7.7a3 3 0 110-6 3 3 0 010 6m6-7.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0"/></svg></a>
+        <a href="https://www.facebook.com/share/p/1BakGcbqx8/" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>L'organisation</h4>
+      <a href="{{ url_for('a_propos') }}">À propos</a>
+      <a href="{{ url_for('a_propos') }}#histoire">Notre histoire</a>
+      <a href="{{ url_for('a_propos') }}#mvv">Mission &amp; valeurs</a>
+      <a href="{{ url_for('domaines') }}">Domaines d'intervention</a>
+      <a href="{{ url_for('programmes') }}">Programmes &amp; projets</a>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <a href="{{ url_for('publications') }}">Publications</a>
+      <a href="{{ url_for('actualites') }}">Actualités</a>
+      <a href="{{ url_for('partenaires') }}">Partenaires</a>
+      <a href="{{ url_for('membre') }}">Devenir membre</a>
+      <a href="{{ url_for('don') }}">Faire un don</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="foot-contact">
+        <b>📍</b> <a href="https://maps.app.goo.gl/Q1LA4MPaCKyDU6uf8" target="_blank" rel="noopener">Route Nationale #6,<br>Village La Différence (EKAM), Haïti</a><br>
+        <b>✉️</b> ojeddreh@gmail.com<br>
+        <b>📞</b> +509 3538 8312<br>
+        <b>👤</b> Shnaider Florestant
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© {{ annee }} OJEDDREH. Tous droits réservés.</span>
+    <span>Mentions légales · Politique de confidentialité</span>
+  </div>
+</div></footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

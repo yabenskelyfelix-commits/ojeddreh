@@ -1,0 +1,35 @@
+<div class="util"><div class="wrap">
+  <div><a href="https://maps.app.goo.gl/Q1LA4MPaCKyDU6uf8" target="_blank" rel="noopener">Route Nationale #6, Village La Différence (EKAM) · Haïti</a></div>
+  <div class="right">
+    <a href="{{ url_for('contact') }}">Nous contacter</a>
+  </div>
+</div></div>
+
+<header class="site"><div class="wrap nav">
+  <a class="brand" href="{{ url_for('accueil') }}">
+    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="#1F9E52">
+        <ellipse cx="50" cy="22" rx="15" ry="9"/><ellipse cx="30" cy="30" rx="12" ry="7" transform="rotate(-30 30 30)"/>
+        <ellipse cx="70" cy="30" rx="12" ry="7" transform="rotate(30 70 30)"/><ellipse cx="22" cy="48" rx="12" ry="7" transform="rotate(-10 22 48)"/>
+        <ellipse cx="78" cy="48" rx="12" ry="7" transform="rotate(10 78 48)"/><ellipse cx="38" cy="16" rx="9" ry="6" transform="rotate(-20 38 16)"/>
+        <ellipse cx="62" cy="16" rx="9" ry="6" transform="rotate(20 62 16)"/>
+      </g>
+      <circle cx="50" cy="40" r="5" fill="#E0A75E"/><path d="M50 45 C40 55 34 72 40 78 L60 78 C66 72 60 55 50 45Z" fill="#D42129"/>
+      <circle cx="34" cy="58" r="4.5" fill="#E0A75E"/><path d="M34 62 c-6 4 -8 14 -4 16 h8 c4-2 2-12 -4-16Z" fill="#D42129"/>
+      <circle cx="66" cy="58" r="4.5" fill="#E0A75E"/><path d="M66 62 c6 4 8 14 4 16 h-8 c-4-2 -2-12 4-16Z" fill="#D42129"/>
+    </svg>
+    <span class="word">OJED<b>D</b>REH</span>
+  </a>
+  <nav class="main" id="menu">
+    <a href="{{ url_for('a_propos') }}"{% if active=='apropos' %} style="color:#D42129"{% endif %}>À propos</a>
+    <a href="{{ url_for('domaines') }}"{% if active=='domaines' %} style="color:#D42129"{% endif %}>Domaines</a>
+    <a href="{{ url_for('programmes') }}"{% if active=='programmes' %} style="color:#D42129"{% endif %}>Programmes</a>
+    <a href="{{ url_for('publications') }}"{% if active=='publications' %} style="color:#D42129"{% endif %}>Publications</a>
+    <a href="{{ url_for('actualites') }}"{% if active=='actualites' %} style="color:#D42129"{% endif %}>Actualités</a>
+    <a href="{{ url_for('contact') }}"{% if active=='contact' %} style="color:#D42129"{% endif %}>Contact</a>
+  </nav>
+  <div class="actions">
+    <a class="btn btn-red" href="{{ url_for('don') }}">Faire un don</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div></header>

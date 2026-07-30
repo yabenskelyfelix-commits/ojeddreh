@@ -1,0 +1,36 @@
+{% set titre = 'Publications — OJEDDREH' %}
+{% set description = "Études, rapports, guides et ressources téléchargeables d'OJEDDREH." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Publications</div>
+    <h1>Publications &amp; ressources</h1>
+    <p>Études, articles, rapports, guides et outils de formation — pour faire d'OJEDDREH une référence dans ses domaines d'intervention.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  {% if items %}
+    <div class="list-grid">
+      {% for p in items %}
+        <article class="item-card reveal">
+          <div class="thumb">📄 {{ p.type|default('Document') }}</div>
+          <div class="body">
+            <div class="tag">{{ p.categorie|default('Ressource') }}</div>
+            <h3>{{ p.titre }}</h3>
+            <p>{{ p.resume }}</p>
+            <div style="margin-top:12px"><a class="btn btn-outline" href="{{ p.fichier|default('#') }}" download>Télécharger (PDF)</a></div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-note">
+      <b>Nos premières publications arrivent bientôt.</b><br>
+      Rapports d'activités, études et guides seront disponibles en téléchargement ici.
+      <div style="margin-top:16px"><a class="btn btn-red" href="{{ url_for('actualites') }}">Voir les actualités</a></div>
+    </div>
+  {% endif %}
+</div></section>
+{% include 'partials/footer.html' %}

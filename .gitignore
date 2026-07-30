@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Données reçues via les formulaires et pièces jointes des candidats :
+# jamais dans le dépôt (données personnelles), elles restent uniquement sur le serveur.
+uploads/
+data/submissions_*.json

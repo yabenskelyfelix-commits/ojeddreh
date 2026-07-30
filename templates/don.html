@@ -1,0 +1,54 @@
+{% set titre = 'Faire un don — OJEDDREH' %}
+{% set description = "Soutenez la formation et l'accompagnement de la jeunesse haïtienne." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Faire un don</div>
+    <h1>Votre don bâtit l'avenir</h1>
+    <p>Chaque contribution finance des actions concrètes : formation, mentorat, accompagnement entrepreneurial et projets communautaires.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="grid-2">
+    <div class="prose reveal">
+      <span class="eyebrow">À quoi sert votre don</span>
+      <h2>Un impact direct sur la jeunesse</h2>
+      <p>Nous ne formons pas seulement des participants : nous développons des leaders, accompagnons des entrepreneurs et soutenons des innovateurs. Votre soutien nous permet d'aller plus loin.</p>
+      <ul>
+        <li>Ateliers de formation et de développement des compétences</li>
+        <li>Accompagnement et mentorat des porteurs de projets</li>
+        <li>Soutien aux initiatives d'agrobusiness et d'innovation</li>
+        <li>Actions d'inclusion des jeunes et des femmes</li>
+      </ul>
+      <div class="empty-note" style="text-align:left;margin-top:20px">
+        <b>Paiement en ligne bientôt disponible.</b><br>
+        Les moyens de paiement (MonCash, PayPal, carte bancaire) seront activés prochainement. En attendant, contactez-nous pour organiser votre don.
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="form-card" data-endpoint="/api/don">
+        <div class="form-msg"></div>
+        <label style="font-family:'Libre Franklin';font-weight:700;font-size:.9rem;display:block;margin-bottom:.6rem">Choisissez un montant (HTG)</label>
+        <div class="amounts">
+          <div class="amount" data-val="500">500</div>
+          <div class="amount" data-val="1000">1 000</div>
+          <div class="amount" data-val="2500">2 500</div>
+          <div class="amount" data-val="5000">5 000</div>
+        </div>
+        <div class="field"><label>Autre montant</label><input id="montant-custom" name="montant" type="number" min="1" placeholder="Montant en HTG"></div>
+        <div class="form-row">
+          <div class="field"><label>Nom complet <span class="req">*</span></label><input name="nom" required></div>
+          <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+        </div>
+        <div class="field"><label>Moyen de paiement préféré</label>
+          <select name="moyen"><option>MonCash</option><option>PayPal</option><option>Carte bancaire</option><option>Virement / autre</option></select>
+        </div>
+        <button class="btn btn-red" type="submit">Je fais un don</button>
+        <div class="pay-methods"><span class="pay">MonCash</span><span class="pay">PayPal</span><span class="pay">Carte bancaire</span></div>
+      </form>
+    </div>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

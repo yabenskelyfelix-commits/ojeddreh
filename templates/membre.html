@@ -1,0 +1,165 @@
+{% set titre = 'Devenir membre — OJEDDREH' %}
+{% set description = 'Rejoignez OJEDDREH comme membre, bénévole, formateur ou expert.' %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Devenir membre</div>
+    <h1>Rejoignez le mouvement</h1>
+    <p>Jeunes, bénévoles, formateurs et experts : engagez-vous à nos côtés pour bâtir un développement durable en Haïti. Remplissez le formulaire d'intégration ci-dessous — notre comité de recrutement étudiera votre candidature.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="reveal" style="max-width:900px;margin:0 auto">
+    <form class="form-card" data-endpoint="/api/membre" enctype="multipart/form-data">
+      <div class="form-msg"></div>
+
+      <h2 class="form-section-title">1. Fiche d'identification du candidat</h2>
+      <div class="form-row">
+        <div class="field"><label>Nom complet <span class="req">*</span></label><input name="nom_complet" required></div>
+        <div class="field"><label>Sexe</label>
+          <div class="check-group">
+            <label class="check-item"><input type="radio" name="sexe" value="Masculin"> Masculin</label>
+            <label class="check-item"><input type="radio" name="sexe" value="Féminin"> Féminin</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Date de naissance</label><input type="date" name="date_naissance"></div>
+        <div class="field"><label>Lieu de naissance</label><input name="lieu_naissance"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Nationalité</label><input name="nationalite" value="Haïtienne"></div>
+        <div class="field"><label>Adresse complète</label><input name="adresse"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Téléphone <span class="req">*</span></label><input name="telephone" required></div>
+        <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" name="email" required></div>
+      </div>
+      <div class="field"><label>Photo de pièce d'identité</label>
+        <input type="file" name="piece_identite" accept=".pdf,.jpg,.jpeg,.png">
+        <p class="field-hint">Formats acceptés : PDF, JPG, PNG. Vous pouvez aussi l'envoyer par e-mail à ojeddreh@gmail.com si vous préférez.</p>
+      </div>
+
+      <h3 class="form-subtitle">Personne à contacter en cas d'urgence</h3>
+      <div class="form-row">
+        <div class="field"><label>Nom complet</label><input name="urgence_nom"></div>
+        <div class="field"><label>Téléphone</label><input name="urgence_telephone"></div>
+      </div>
+      <div class="field"><label>Relation</label><input name="urgence_relation"></div>
+
+      <h2 class="form-section-title">2. Parcours académique et professionnel</h2>
+      <div class="field"><label>Niveau académique</label>
+        <div class="check-group">
+          {% for niveau in ['Primaire','Secondaire','Technique','Universitaire','Master','Doctorat'] %}
+          <label class="check-item"><input type="radio" name="niveau_academique" value="{{ niveau }}"> {{ niveau }}</label>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Formation principale</label><input name="formation_principale"></div>
+        <div class="field"><label>Profession actuelle</label><input name="profession_actuelle"></div>
+      </div>
+      <div class="field"><label>Expériences professionnelles</label><textarea name="experiences_professionnelles"></textarea></div>
+      <div class="field"><label>Certifications obtenues</label><textarea name="certifications"></textarea></div>
+      <div class="field"><label>Langues parlées</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="langue_creole"> Créole</label>
+          <label class="check-item"><input type="checkbox" name="langue_francais"> Français</label>
+          <label class="check-item"><input type="checkbox" name="langue_anglais"> Anglais</label>
+          <label class="check-item"><input type="checkbox" name="langue_espagnol"> Espagnol</label>
+        </div>
+        <input name="langue_autre" placeholder="Autre langue (facultatif)" style="margin-top:10px">
+      </div>
+      <div class="field"><label>Autres informations utiles</label><textarea name="autres_informations" placeholder="Tout élément complémentaire que vous souhaitez partager…"></textarea></div>
+
+      <h2 class="form-section-title">3. Motivation et vision</h2>
+      <div class="field"><label>Pourquoi souhaitez-vous intégrer l'organisation ? <span class="req">*</span></label><textarea name="motivation_integrer" required></textarea></div>
+      <div class="field"><label>Que pouvez-vous apporter à l'organisation ?</label><textarea name="apport_organisation"></textarea></div>
+      <div class="field"><label>Quels changements souhaitez-vous apporter à votre communauté ?</label><textarea name="changements_communaute"></textarea></div>
+      <div class="field"><label>Votre vision personnelle dans 5 ans</label><textarea name="vision_5ans"></textarea></div>
+
+      <h2 class="form-section-title">4. Disponibilité</h2>
+      <div class="field"><label>Temps disponible</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="temps_disponible" value="2 à 4 heures/semaine"> 2 à 4 h/semaine</label>
+          <label class="check-item"><input type="radio" name="temps_disponible" value="5 à 10 heures/semaine"> 5 à 10 h/semaine</label>
+          <label class="check-item"><input type="radio" name="temps_disponible" value="Plus de 10 heures/semaine"> Plus de 10 h/semaine</label>
+        </div>
+      </div>
+      <div class="field"><label>Créneaux préférés</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="creneau_matin"> Matin</label>
+          <label class="check-item"><input type="checkbox" name="creneau_apres_midi"> Après-midi</label>
+          <label class="check-item"><input type="checkbox" name="creneau_soir"> Soir</label>
+          <label class="check-item"><input type="checkbox" name="creneau_weekend"> Week-end</label>
+        </div>
+      </div>
+      <div class="field"><label>Disponibilité pour déplacement</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="deplacement" value="Oui"> Oui</label>
+          <label class="check-item"><input type="radio" name="deplacement" value="Non"> Non</label>
+        </div>
+      </div>
+
+      <h2 class="form-section-title">5. Choix du département</h2>
+      <div class="field"><label>Département souhaité <span class="req">*</span></label>
+        <select name="departement" required>
+          <option value="">— Choisir —</option>
+          {% for dep in departements %}<option>{{ dep }}</option>{% endfor %}
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <h2 class="form-section-title">6. Charte d'engagement, éthique et confidentialité</h2>
+      <ul class="engagement-list">
+        <li>Respecter les valeurs de l'organisation</li>
+        <li>Respecter les dirigeants, membres et partenaires</li>
+        <li>Participer activement aux activités</li>
+        <li>Être ponctuel et professionnel</li>
+        <li>Respecter les décisions collectives</li>
+        <li>Contribuer au développement de la communauté</li>
+        <li>Préserver l'image de l'organisation</li>
+        <li>Respecter la confidentialité des informations</li>
+      </ul>
+      <div class="field"><label class="check-item"><input type="checkbox" name="accepte_charte" required> J'ai lu et j'accepte la charte d'engagement du membre <span class="req">*</span></label></div>
+      <div class="field"><label class="check-item"><input type="checkbox" name="accepte_ethique" required> Je m'engage à respecter le code d'éthique de l'organisation (honnêteté, refus de la corruption, respect de la diversité et de l'inclusion, transparence, absence de conflit d'intérêts) <span class="req">*</span></label></div>
+      <div class="field"><label class="check-item"><input type="checkbox" name="accepte_confidentialite" required> Je reconnais le caractère confidentiel de certaines informations obtenues dans le cadre de mes fonctions et je m'engage à ne pas les divulguer sans autorisation officielle <span class="req">*</span></label></div>
+
+      <div class="field"><label>Consentement photo et vidéo</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="consentement_image" value="Autorise" required> J'autorise l'organisation à utiliser mon image, ma voix et mes témoignages dans ses publications</label>
+          <label class="check-item"><input type="radio" name="consentement_image" value="Refuse"> Je refuse l'utilisation de mon image</label>
+        </div>
+      </div>
+
+      <div class="field"><label>Déclaration de conflit d'intérêts</label>
+        <div class="check-group">
+          <label class="check-item"><input type="radio" name="conflit_interets" value="Aucun" required> Je n'ai pas de conflit d'intérêts</label>
+          <label class="check-item"><input type="radio" name="conflit_interets" value="À déclarer"> Je dois déclarer un conflit d'intérêts</label>
+        </div>
+        <input name="conflit_interets_detail" placeholder="Si applicable, précisez le conflit d'intérêts" style="margin-top:10px">
+      </div>
+
+      <h2 class="form-section-title">7. Pièces à fournir</h2>
+      <p class="field-hint">Vous pouvez joindre vos documents ici, ou les envoyer par e-mail à ojeddreh@gmail.com.</p>
+      <div class="form-row">
+        <div class="field"><label>Curriculum Vitae (CV)</label><input type="file" name="cv" accept=".pdf,.doc,.docx"></div>
+        <div class="field"><label>Lettre de motivation</label><input type="file" name="lettre_motivation" accept=".pdf,.doc,.docx"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Copie de pièce d'identité</label><input type="file" name="piece_identite" accept=".pdf,.jpg,.jpeg,.png"></div>
+        <div class="field"><label>Photo d'identité</label><input type="file" name="photo_identite" accept=".jpg,.jpeg,.png"></div>
+      </div>
+      <div class="field"><label>Références personnelles</label><textarea name="references_personnelles" placeholder="Nom, fonction et contact d'une ou deux personnes pouvant vous recommander"></textarea></div>
+
+      <h2 class="form-section-title">Certificat d'engagement</h2>
+      <div class="field"><label>Signature électronique (tapez votre nom complet) <span class="req">*</span></label><input name="signature_nom" required></div>
+      <div class="field"><label class="check-item"><input type="checkbox" name="certification" required> Je certifie que les informations fournies sont exactes et je m'engage à respecter les statuts, règlements et valeurs de l'organisation <span class="req">*</span></label></div>
+
+      <button class="btn btn-red" type="submit">Envoyer ma candidature</button>
+    </form>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

@@ -1,0 +1,11 @@
+{% set titre = 'Page introuvable — OJEDDREH' %}
+{% set description = "Cette page n'existe pas." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<section style="text-align:center;padding:120px 0"><div class="wrap">
+  <div style="font-family:'Space Grotesk';font-weight:700;font-size:5rem;color:var(--green-700)">404</div>
+  <h1 style="font-size:2rem;margin:.5rem 0 1rem">Cette page est introuvable</h1>
+  <p style="color:var(--muted);max-width:44ch;margin:0 auto 1.6rem">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+  <a class="btn btn-red" href="{{ url_for('accueil') }}">Retour à l'accueil</a>
+</div></section>
+{% include 'partials/footer.html' %}
