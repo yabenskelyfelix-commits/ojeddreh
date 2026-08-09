@@ -13,6 +13,7 @@
 <section><div class="wrap">
   <div class="reveal" style="max-width:900px;margin:0 auto">
     <form class="form-card" data-endpoint="/api/membre" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="form-msg"></div>
 
       <h2 class="form-section-title">1. Fiche d'identification du candidat</h2>
@@ -94,6 +95,7 @@
           <label class="check-item"><input type="checkbox" name="creneau_apres_midi"> Après-midi</label>
           <label class="check-item"><input type="checkbox" name="creneau_soir"> Soir</label>
           <label class="check-item"><input type="checkbox" name="creneau_weekend"> Week-end</label>
+          <label class="check-item"><input type="checkbox" name="creneau_8h_16h"> 8h AM à 4h PM</label>
         </div>
       </div>
       <div class="field"><label>Disponibilité pour déplacement</label>

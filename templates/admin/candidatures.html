@@ -68,6 +68,7 @@
       <details class="admin-details" {% if c.evaluation %}open{% endif %}>
         <summary>Grille d'évaluation interne (réservée aux organisateurs)</summary>
         <form method="post" action="{{ url_for('admin_noter_candidature', id_candidature=c.id) }}" style="margin-top:14px">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="admin-grid-notes">
             {% for cle, label, points in grille %}
             <div><label>{{ label }} (/{{ points }})</label>

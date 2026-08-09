@@ -1,0 +1,56 @@
+{% set titre = 'Politique de confidentialité — OJEDDREH' %}
+{% set description = "Comment l'OJEDDREH collecte, utilise et protège les données personnelles transmises via ce site." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Politique de confidentialité</div>
+    <h1>Politique de confidentialité</h1>
+    <p>Comment nous collectons, utilisons et protégeons vos données personnelles.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="prose reveal">
+    <h2>1. Qui collecte vos données ?</h2>
+    <p>L'<b>Organisation des Jeunes pour le Développement Durable et de la Résilience Économique d'Haïti (OJEDDREH)</b>, Route Nationale #6, Village La Différence (EKAM), Haïti — <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a> — est responsable du traitement des données transmises via ce site.</p>
+
+    <h2>2. Quelles données sont collectées</h2>
+    <p>Nous collectons uniquement les données que vous nous transmettez volontairement en remplissant l'un de nos formulaires :</p>
+    <ul>
+      <li><b>Contact :</b> nom, prénom, e-mail, message.</li>
+      <li><b>Devenir membre :</b> identité, coordonnées, langues parlées, disponibilités, motivation, et, le cas échéant, les pièces jointes que vous choisissez de transmettre (pièce d'identité, photo, CV, lettre de motivation).</li>
+      <li><b>Inscription à un atelier :</b> identité, coordonnées, centres d'intérêt.</li>
+      <li><b>Demande de partenariat :</b> organisation, personne de contact, e-mail, message.</li>
+      <li><b>Intention de don :</b> nom, e-mail.</li>
+      <li><b>Infolettre :</b> adresse e-mail.</li>
+    </ul>
+    <p>Aucune donnée n'est collectée à votre insu : le site n'utilise ni cookie de suivi publicitaire, ni outil d'analyse d'audience (Google Analytics ou équivalent).</p>
+
+    <h2>3. Pourquoi nous les utilisons</h2>
+    <p>Ces données servent exclusivement à :</p>
+    <ul>
+      <li>répondre à vos demandes et messages ;</li>
+      <li>traiter les candidatures d'adhésion et les inscriptions aux ateliers ;</li>
+      <li>vous recontacter dans le cadre d'un partenariat ou d'un don ;</li>
+      <li>vous envoyer notre infolettre, si vous vous y êtes inscrit·e.</li>
+    </ul>
+
+    <h2>4. Où et comment elles sont conservées</h2>
+    <p>Les données sont stockées de façon sécurisée sur le serveur d'hébergement du site et ne sont accessibles qu'aux membres autorisés d'OJEDDREH, via un espace protégé par mot de passe. Les pièces jointes des candidatures (pièce d'identité, CV, etc.) sont conservées dans un espace privé, jamais publié ni indexé publiquement.</p>
+    <p>Une notification automatique par e-mail est envoyée à l'équipe d'OJEDDREH à chaque nouvelle soumission, via un prestataire technique d'envoi d'e-mails (Brevo), qui agit uniquement comme sous-traitant technique et n'utilise pas ces données à d'autres fins.</p>
+
+    <h2>5. Durée de conservation</h2>
+    <p>Vos données sont conservées le temps nécessaire au traitement de votre demande, puis archivées ou supprimées lorsqu'elles ne sont plus utiles à cette finalité.</p>
+
+    <h2>6. Vos droits</h2>
+    <p>Vous pouvez à tout moment demander l'accès, la rectification ou la suppression des données vous concernant, ou retirer votre consentement (par exemple vous désinscrire de l'infolettre), en nous écrivant à <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a>.</p>
+
+    <h2>7. Cookies</h2>
+    <p>Ce site utilise uniquement un cookie technique de session, nécessaire au fonctionnement de l'espace réservé aux organisateurs (connexion à l'administration). Ce cookie ne sert à aucun suivi publicitaire. Le site fait également appel à Google Fonts pour l'affichage des polices de caractères.</p>
+
+    <h2>8. Contact</h2>
+    <p>Pour toute question relative à la protection de vos données, contactez-nous via notre <a href="{{ url_for('contact') }}">page de contact</a> ou à <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a>.</p>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

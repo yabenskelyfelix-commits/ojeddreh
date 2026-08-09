@@ -1,0 +1,42 @@
+{% set titre = 'Mentions légales — OJEDDREH' %}
+{% set description = "Mentions légales du site de l'Organisation des Jeunes pour le Développement Durable et de la Résilience Économique d'Haïti." %}
+{% include 'partials/head.html' %}
+{% include 'partials/header.html' %}
+<div class="page-banner">
+  <div class="wrap">
+    <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · Mentions légales</div>
+    <h1>Mentions légales</h1>
+    <p>Informations légales relatives à l'édition et à l'hébergement de ce site.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="prose reveal">
+    <h2>1. Éditeur du site</h2>
+    <p>Le présent site est édité par l'<b>Organisation des Jeunes pour le Développement Durable et de la Résilience Économique d'Haïti (OJEDDREH)</b>, organisation non gouvernementale à but non lucratif fondée en janvier 2026.</p>
+    <ul>
+      <li><b>Siège :</b> Route Nationale #6, Village La Différence (EKAM), Haïti</li>
+      <li><b>E-mail :</b> <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a></li>
+      <li><b>Téléphone :</b> <a href="tel:+50935388312">+509 3538 8312</a></li>
+    </ul>
+
+    <h2>2. Directeur de publication</h2>
+    <p>La publication du site est assurée par le conseil directeur d'OJEDDREH.</p>
+
+    <h2>3. Hébergement</h2>
+    <p>Le site est hébergé par PythonAnywhere LLC. Toute demande relative à l'hébergement technique peut être adressée à l'éditeur du site, qui la transmettra à l'hébergeur si nécessaire.</p>
+
+    <h2>4. Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus présents sur ce site (textes, logo, illustrations, mise en page) est la propriété d'OJEDDREH, sauf mention contraire. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation préalable, est interdite.</p>
+
+    <h2>5. Responsabilité</h2>
+    <p>OJEDDREH s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site, sans toutefois garantir l'exhaustivité ou l'absence d'erreurs. L'organisation ne saurait être tenue responsable des dommages directs ou indirects résultant de l'accès ou de l'utilisation du site.</p>
+
+    <h2>6. Liens externes</h2>
+    <p>Ce site peut contenir des liens vers des sites tiers (réseaux sociaux, partenaires, cartes). OJEDDREH n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu.</p>
+
+    <h2>7. Contact</h2>
+    <p>Pour toute question relative à ces mentions légales, vous pouvez nous écrire à <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a> ou via notre <a href="{{ url_for('contact') }}">page de contact</a>.</p>
+  </div>
+</div></section>
+{% include 'partials/footer.html' %}

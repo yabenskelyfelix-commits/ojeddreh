@@ -29,6 +29,7 @@
     </div>
     <div class="reveal">
       <form class="form-card" data-endpoint="/api/don">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-msg"></div>
         <label style="font-family:'Libre Franklin';font-weight:700;font-size:.9rem;display:block;margin-bottom:.6rem">Choisissez un montant (HTG)</label>
         <div class="amounts">

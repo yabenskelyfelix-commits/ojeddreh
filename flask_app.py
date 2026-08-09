@@ -6,8 +6,10 @@ Lancement en local :  python flask_app.py
 Puis ouvrir http://127.0.0.1:5000
 """
 import functools
+import hmac
 import json
 import os
+import secrets
 import urllib.request
 import uuid
 from datetime import datetime
@@ -17,6 +19,10 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-uniquement-a-changer-en-production")
+
+# Taille maximale acceptée pour une requête entrante (formulaire "membre" avec
+# jusqu'à 4 pièces jointes compris) : au-delà, Flask renvoie automatiquement 413.
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 Mo
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -155,7 +161,43 @@ app.jinja_env.filters["date_fr"] = date_fr
 
 @app.context_processor
 def variables_globales():
-    return {"annee": datetime.now().year}
+    return {"annee": datetime.now().year, "csrf_token": obtenir_jeton_csrf}
+
+
+# ---------- Protection CSRF ----------
+def obtenir_jeton_csrf():
+    """Crée (une fois par session) et renvoie le jeton anti-CSRF à inclure dans les formulaires."""
+    if "csrf_token" not in session:
+        session["csrf_token"] = secrets.token_hex(32)
+    return session["csrf_token"]
+
+
+def jeton_csrf_valide():
+    """Compare le jeton reçu (form ou JSON) à celui stocké en session, en temps constant."""
+    jeton_session = session.get("csrf_token", "")
+    donnees = request.get_json(silent=True) or request.form
+    jeton_recu = str((donnees or {}).get("csrf_token", ""))
+    return bool(jeton_session) and hmac.compare_digest(jeton_session, jeton_recu)
+
+
+def csrf_protege(vue):
+    """Bloque les requêtes POST dépourvues d'un jeton CSRF valide."""
+    @functools.wraps(vue)
+    def enveloppe(*args, **kwargs):
+        if request.method == "POST" and not jeton_csrf_valide():
+            if request.path.startswith("/api/"):
+                return jsonify(ok=False,
+                               message="Session expirée : veuillez rafraîchir la page et réessayer."), 400
+            return render_template("404.html", active=""), 400
+        return vue(*args, **kwargs)
+    return enveloppe
+
+
+@app.errorhandler(413)
+def fichier_trop_volumineux(e):
+    if request.path.startswith("/api/"):
+        return jsonify(ok=False, message="Fichier(s) trop volumineux (16 Mo maximum au total)."), 413
+    return render_template("404.html", active=""), 413
 
 
 # ================= PAGES =================
@@ -253,6 +295,16 @@ def publications():
                            active="publications")
 
 
+@app.route("/mentions-legales")
+def mentions_legales():
+    return render_template("mentions-legales.html", active="")
+
+
+@app.route("/politique-confidentialite")
+def politique_confidentialite():
+    return render_template("politique-confidentialite.html", active="")
+
+
 # ================= API FORMULAIRES =================
 def traiter(nom_fichier, champs_requis, message_succes, sujet_notification):
     """Valide les champs, enregistre la soumission puis notifie l'équipe par e-mail."""
@@ -275,6 +327,7 @@ def traiter(nom_fichier, champs_requis, message_succes, sujet_notification):
 
 
 @app.route("/api/contact", methods=["POST"])
+@csrf_protege
 def api_contact():
     return traiter("submissions_contact.json",
                    ["prenom", "nom", "email", "message"],
@@ -283,6 +336,7 @@ def api_contact():
 
 
 @app.route("/api/membre", methods=["POST"])
+@csrf_protege
 def api_membre():
     # main.js envoie en multipart dès qu'une pièce jointe est choisie, sinon en JSON
     est_multipart = (request.content_type or "").startswith("multipart/form-data")
@@ -300,6 +354,7 @@ def api_membre():
     donnees["creneaux_disponibles"] = cases_cochees(donnees, "creneau", [
         ("matin", "Matin"), ("apres_midi", "Après-midi"),
         ("soir", "Soir"), ("weekend", "Week-end"),
+        ("8h_16h", "8h AM à 4h PM"),
     ])
 
     if est_multipart:
@@ -312,6 +367,7 @@ def api_membre():
         ajouter_json("submissions_membre.json", donnees)
         exclure = {"langue_creole", "langue_francais", "langue_anglais", "langue_espagnol",
                    "creneau_matin", "creneau_apres_midi", "creneau_soir", "creneau_weekend",
+                   "creneau_8h_16h",
                    "accepte_charte", "accepte_ethique", "accepte_confidentialite", "certification",
                    "fichier_piece_identite", "fichier_photo_identite", "fichier_cv", "fichier_lettre_motivation"}
         corps = (f"Nouvelle candidature d'adhésion reçue sur le site OJEDDREH.\n\n"
@@ -324,6 +380,7 @@ def api_membre():
 
 
 @app.route("/api/atelier", methods=["POST"])
+@csrf_protege
 def api_atelier():
     donnees = request.get_json(silent=True) or request.form.to_dict()
 
@@ -354,6 +411,7 @@ def api_atelier():
 
 
 @app.route("/api/partenaire", methods=["POST"])
+@csrf_protege
 def api_partenaire():
     return traiter("submissions_partenaire.json",
                    ["organisation", "contact", "email", "message"],
@@ -362,6 +420,7 @@ def api_partenaire():
 
 
 @app.route("/api/don", methods=["POST"])
+@csrf_protege
 def api_don():
     return traiter("submissions_don.json", ["nom", "email"],
                    "Merci pour votre intention de don ! Nous vous recontacterons pour finaliser.",
@@ -369,6 +428,7 @@ def api_don():
 
 
 @app.route("/api/newsletter", methods=["POST"])
+@csrf_protege
 def api_newsletter():
     return traiter("submissions_newsletter.json", ["email"],
                    "Merci ! Vous êtes inscrit·e à notre infolettre.",
@@ -399,10 +459,11 @@ GRILLE_ATELIER = [
 
 
 @app.route("/admin/connexion", methods=["GET", "POST"])
+@csrf_protege
 def admin_connexion():
     erreur = None
     if request.method == "POST":
-        if request.form.get("mot_de_passe") == ADMIN_PASSWORD:
+        if hmac.compare_digest(request.form.get("mot_de_passe", ""), ADMIN_PASSWORD):
             session["admin_connecte"] = True
             return redirect(request.args.get("suivant") or url_for("admin_accueil"))
         erreur = "Mot de passe incorrect."
@@ -434,6 +495,7 @@ def admin_candidatures():
 
 @app.route("/admin/candidatures/<id_candidature>/noter", methods=["POST"])
 @connexion_requise
+@csrf_protege
 def admin_noter_candidature(id_candidature):
     evaluation = {cle: request.form.get(cle, "") for cle, _, _ in GRILLE_CANDIDATURE}
     evaluation["decision"] = request.form.get("decision", "")
@@ -455,6 +517,7 @@ def admin_ateliers():
 
 @app.route("/admin/ateliers/<id_inscription>/noter", methods=["POST"])
 @connexion_requise
+@csrf_protege
 def admin_noter_atelier(id_inscription):
     evaluation = {cle: request.form.get(cle, "") for cle, _, _ in GRILLE_ATELIER}
     evaluation["decision"] = request.form.get("decision", "")

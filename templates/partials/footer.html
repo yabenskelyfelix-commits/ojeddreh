@@ -28,15 +28,14 @@
       <h4>Contact</h4>
       <div class="foot-contact">
         <b>📍</b> <a href="https://maps.app.goo.gl/Q1LA4MPaCKyDU6uf8" target="_blank" rel="noopener">Route Nationale #6,<br>Village La Différence (EKAM), Haïti</a><br>
-        <b>✉️</b> ojeddreh@gmail.com<br>
-        <b>📞</b> +509 3538 8312<br>
-        <b>👤</b> Shnaider Florestant
+        <b>✉️</b> <a href="mailto:ojeddreh@gmail.com">ojeddreh@gmail.com</a><br>
+        <b>📞</b> <a href="tel:+50935388312">+509 3538 8312</a>
       </div>
     </div>
   </div>
   <div class="foot-bottom">
     <span>© {{ annee }} OJEDDREH. Tous droits réservés.</span>
-    <span>Mentions légales · Politique de confidentialité</span>
+    <span><a href="{{ url_for('mentions_legales') }}">Mentions légales</a> · <a href="{{ url_for('politique_confidentialite') }}">Politique de confidentialité</a></span>
   </div>
 </div></footer>
 

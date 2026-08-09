@@ -35,6 +35,7 @@
   </div>
   <div class="reveal" style="max-width:900px;margin:0 auto">
     <form class="form-card" data-endpoint="/api/atelier">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="form-msg"></div>
 
       <h2 class="form-section-title">Informations personnelles</h2>

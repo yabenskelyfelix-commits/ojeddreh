@@ -35,6 +35,7 @@
     </div>
     <div class="reveal">
       <form class="form-card" data-endpoint="/api/partenaire">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-msg"></div>
         <div class="field"><label>Organisation <span class="req">*</span></label><input name="organisation" required></div>
         <div class="form-row">

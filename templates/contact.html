@@ -32,6 +32,7 @@
 
     <div class="reveal">
       <form class="form-card" data-endpoint="/api/contact">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-msg"></div>
         <div class="form-row">
           <div class="field"><label>Prénom <span class="req">*</span></label><input name="prenom" required></div>
