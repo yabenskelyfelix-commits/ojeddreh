@@ -91,7 +91,7 @@
   .orbit-tag{position:absolute;background:#fff;color:var(--green-800);font-family:'Space Grotesk';font-weight:600;
     font-size:.72rem;padding:.4rem .8rem;border-radius:999px;box-shadow:var(--shadow);white-space:nowrap}
   .orbit-tag.t1{top:6%;left:44%} .orbit-tag.t2{top:40%;right:-4%} .orbit-tag.t3{bottom:8%;left:8%}
-  .orbit-tag.t4{bottom:34%;left:-6%} .orbit-tag.t5{bottom:8%;right:-2%}
+  .orbit-tag.t4{bottom:34%;left:-6%} .orbit-tag.t5{bottom:8%;right:8%}
   .hero-logo{width:52%;position:relative;z-index:3;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
   .scrollcue{margin-top:26px;font-family:'Space Grotesk';font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#cdeed8}
 
