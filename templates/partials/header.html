@@ -7,17 +7,7 @@
 
 <header class="site"><div class="wrap nav">
   <a class="brand" href="{{ url_for('accueil') }}">
-    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="#1F9E52">
-        <ellipse cx="50" cy="22" rx="15" ry="9"/><ellipse cx="30" cy="30" rx="12" ry="7" transform="rotate(-30 30 30)"/>
-        <ellipse cx="70" cy="30" rx="12" ry="7" transform="rotate(30 70 30)"/><ellipse cx="22" cy="48" rx="12" ry="7" transform="rotate(-10 22 48)"/>
-        <ellipse cx="78" cy="48" rx="12" ry="7" transform="rotate(10 78 48)"/><ellipse cx="38" cy="16" rx="9" ry="6" transform="rotate(-20 38 16)"/>
-        <ellipse cx="62" cy="16" rx="9" ry="6" transform="rotate(20 62 16)"/>
-      </g>
-      <circle cx="50" cy="40" r="5" fill="#E0A75E"/><path d="M50 45 C40 55 34 72 40 78 L60 78 C66 72 60 55 50 45Z" fill="#D42129"/>
-      <circle cx="34" cy="58" r="4.5" fill="#E0A75E"/><path d="M34 62 c-6 4 -8 14 -4 16 h8 c4-2 2-12 -4-16Z" fill="#D42129"/>
-      <circle cx="66" cy="58" r="4.5" fill="#E0A75E"/><path d="M66 62 c6 4 8 14 4 16 h-8 c-4-2 -2-12 4-16Z" fill="#D42129"/>
-    </svg>
+    <img class="logo-mark" src="{{ url_for('static', filename='img/logo-icone.png') }}" alt="Logo OJEDDREH">
     <span class="word">OJED<b>D</b>REH</span>
   </a>
   <nav class="main" id="menu">
