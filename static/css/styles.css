@@ -274,7 +274,8 @@
   display:flex;flex-direction:column;transition:.2s}
 .item-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
 .item-card .thumb{aspect-ratio:16/9;background:linear-gradient(150deg,#c9e6d3,#f3e1c4);display:grid;place-items:center;
-  color:#6d7d70;font-size:.82rem}
+  color:#6d7d70;font-size:.82rem;overflow:hidden}
+.item-card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .item-card .body{padding:20px;flex:1;display:flex;flex-direction:column}
 .item-card .tag{font-family:'Space Grotesk';font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:600}
 .item-card h3{font-size:1.15rem;font-weight:800;margin:.4rem 0 .5rem}
@@ -349,5 +350,18 @@ details.admin-details summary{cursor:pointer;font-weight:700;color:var(--green-7
 .pay{border:1.5px solid var(--line);border-radius:10px;padding:.7rem 1.1rem;font-family:'Space Grotesk';
   font-weight:600;font-size:.85rem;color:var(--muted)}
 
-@media(max-width:960px){.grid-2{grid-template-columns:1fr}.grid-3,.dom-grid,.list-grid{grid-template-columns:repeat(2,1fr)}.amounts{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:680px){.grid-3,.dom-grid,.list-grid,.form-row{grid-template-columns:1fr}}
+/* Photos */
+.photo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:36px}
+.photo-grid .ph{border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:var(--paper-2)}
+.photo-grid .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}
+.photo-grid .ph:hover img{transform:scale(1.06)}
+
+.figure-photo{border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.figure-photo img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+.figure-photo figcaption{font-size:.8rem;color:var(--muted);padding:.6rem .1rem 0}
+
+.banner-photo{border-radius:20px;overflow:hidden;margin-top:28px;box-shadow:var(--shadow)}
+.banner-photo img{width:100%;display:block;max-height:420px;object-fit:cover}
+
+@media(max-width:960px){.grid-2{grid-template-columns:1fr}.grid-3,.dom-grid,.list-grid{grid-template-columns:repeat(2,1fr)}.amounts{grid-template-columns:repeat(2,1fr)}.photo-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.grid-3,.dom-grid,.list-grid,.form-row{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,1fr)}}

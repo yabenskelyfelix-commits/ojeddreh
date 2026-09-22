@@ -11,7 +11,8 @@
 </div>
 
 <section><div class="wrap">
-  <div class="reveal" style="max-width:900px;margin:0 auto">
+  <figure class="banner-photo reveal"><img src="{{ url_for('static', filename='img/photos/podium-1.jpg') }}" alt="Jeune membre OJEDDREH s'exprimant lors d'une session" loading="lazy"></figure>
+  <div class="reveal" style="max-width:900px;margin:36px auto 0">
     <form class="form-card" data-endpoint="/api/membre" enctype="multipart/form-data">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="form-msg"></div>
