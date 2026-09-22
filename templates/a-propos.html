@@ -2,7 +2,7 @@
 {% set description = 'Notre histoire, notre mission, notre vision, nos valeurs et notre gouvernance.' %}
 {% include 'partials/head.html' %}
 {% include 'partials/header.html' %}
-<div class="page-banner">
+<div class="page-banner" style="--sp-img:url('{{ url_for('static', filename='img/photos/banner-apropos.jpg') }}')">
   <div class="wrap">
     <div class="crumb"><a href="{{ url_for('accueil') }}">Accueil</a> · À propos</div>
     <h1>Qui nous sommes</h1>
@@ -34,7 +34,7 @@
   </div>
 </div></section>
 
-<section id="mvv" style="background:var(--paper-2)"><div class="wrap">
+<section id="mvv" class="section-photo" style="--sp-img:url('{{ url_for('static', filename='img/photos/mvv-apropos.jpg') }}')"><div class="wrap">
   <div class="mvv-grid">
     <div class="reveal">
       <span class="eyebrow">Notre raison d'être</span>
@@ -67,7 +67,7 @@
   </div>
 </div></section>
 
-<section id="gouvernance" style="background:var(--paper-2)"><div class="wrap">
+<section id="gouvernance" class="section-photo" style="--sp-img:url('{{ url_for('static', filename='img/photos/gouvernance.jpg') }}')"><div class="wrap">
   <div class="sec-head reveal">
     <span class="eyebrow">Gouvernance</span>
     <h2>Une équipe engagée</h2>
@@ -79,7 +79,7 @@
   </div>
 </div></section>
 
-<section><div class="wrap"><div class="news reveal">
+<section><div class="wrap"><div class="news reveal" style="--sp-img:url('{{ url_for('static', filename='img/photos/news-apropos.jpg') }}')">
   <div><h2>Envie d'en savoir plus ?</h2><p>Contactez-nous pour découvrir nos programmes ou explorer un partenariat.</p></div>
   <div style="display:flex;gap:.7rem;flex-wrap:wrap">
     <a class="btn btn-red" href="{{ url_for('contact') }}">Nous contacter</a>

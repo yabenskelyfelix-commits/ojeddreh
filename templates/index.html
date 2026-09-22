@@ -57,7 +57,7 @@
 </div></section>
 
 <!-- Mission / Vision / Valeurs -->
-<section><div class="wrap">
+<section class="section-photo" style="--sp-img:url('{{ url_for('static', filename='img/photos/mvv-bg.jpg') }}')"><div class="wrap">
   <div class="mvv-grid">
     <div class="reveal">
       <span class="eyebrow">Qui nous sommes</span>
@@ -154,7 +154,7 @@
 </div></section>
 
 <!-- Newsletter -->
-<section style="padding-top:0"><div class="wrap"><div class="news reveal">
+<section style="padding-top:0"><div class="wrap"><div class="news reveal" style="--sp-img:url('{{ url_for('static', filename='img/photos/news-index.jpg') }}')">
   <div><h2>Suivez nos actions</h2><p>Actualités, opportunités, publications et appels à candidatures directement dans votre boîte mail.</p></div>
   <form onsubmit="return false"><input type="email" placeholder="Votre adresse e-mail" aria-label="E-mail"><button class="btn btn-red" type="submit">S'abonner</button></form>
 </div></div></section>
