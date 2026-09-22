@@ -186,6 +186,8 @@
   .odd-tile .l{font-size:.78rem;font-weight:600;line-height:1.2}
   .odd2{background:#DDA63A}.odd4{background:#C5192D}.odd8{background:#A21942}
   .odd9{background:#FD6925}.odd13{background:#3F7E44}.odd17{background:#19486A}
+  .odd-icon{width:100%;display:block;border-radius:14px;box-shadow:var(--shadow);transition:.2s}
+  .odd-icon:hover{transform:translateY(-4px)}
 
   /* ---- s'impliquer ---- */
   .involve{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
